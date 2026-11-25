@@ -231,7 +231,6 @@ a {
 /* Tarjetas y secciones */
 .tarjeta {
     background-color: var(--color-superficie);
-    border: 1px solid var(--color-borde);
     border-radius: var(--radio-lg);
     padding: 22px;
     box-shadow: var(--sombra-suave);
@@ -276,7 +275,6 @@ a {
     gap: 24px;
     align-items: center;
     background-color: var(--color-superficie);
-    border: 1px solid var(--color-borde);
     border-radius: var(--radio-lg);
     padding: 28px;
     box-shadow: var(--sombra-suave);
@@ -428,8 +426,6 @@ a {
     justify-content: space-between;
     gap: 16px 24px;
     background-color: var(--color-superficie);
-    border: 1px solid var(--color-borde);
-    border-left: 5px solid var(--color-acento);
     border-radius: var(--radio-lg);
     padding: 22px;
     box-shadow: var(--sombra-suave);
@@ -455,7 +451,6 @@ a {
     padding: 14px 16px;
     margin-bottom: 20px;
     background-color: var(--color-superficie-suave);
-    border: 1px solid var(--color-borde);
     border-radius: var(--radio-md);
 }
 
@@ -483,7 +478,6 @@ a {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border: 1px solid var(--color-borde);
     border-radius: var(--radio-md);
 }
 
@@ -533,7 +527,6 @@ a {
 .estado-vacio {
     text-align: center;
     padding: 36px 18px;
-    border: 1px dashed var(--color-borde);
     border-radius: var(--radio-md);
     background-color: var(--color-superficie-suave);
 }
@@ -563,7 +556,7 @@ a {
 .grupo-campos {
     margin: 0;
     padding: 18px;
-    border: 1px solid var(--color-borde);
+    border: none;
     border-radius: var(--radio-md);
     background-color: var(--color-superficie-suave);
 }
@@ -616,7 +609,7 @@ a {
 .campo-filtro select:focus {
     outline: none;
     border-color: var(--color-acento);
-    box-shadow: 0 0 0 3px rgba(224, 109, 31, 0.18);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
 }
 
 .campo input[readonly] {
