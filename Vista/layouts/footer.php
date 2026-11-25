@@ -2,22 +2,21 @@
 
     <footer class="site-footer">
         <div class="contenedor footer-contenido">
-            <p class="footer-marca"><strong>Machine Line</strong> &mdash; Arrendadora de Autos</p>
+            <p class="footer-marca"><img src="<?= $rutaVista ?>img/logo-blanco.png" alt="Machine Line" height="26"><br>Arrendadora de Autos</p>
             <nav class="footer-redes" aria-label="Redes sociales">
                 <strong>Síguenos</strong>
                 <ul>
                 <?php
-                // shortcut: logos desde el CDN de Simple Icons (requiere internet); descargarlos a Vista/img/ si se necesita offline
                 foreach ([
                     ['Facebook',  'https://www.facebook.com/',  'facebook'],
                     ['Instagram', 'https://www.instagram.com/', 'instagram'],
-                    ['X',         'https://x.com/',             'x/white'],
+                    ['X',         'https://x.com/',             'x'],
                     ['YouTube',   'https://www.youtube.com/',   'youtube'],
-                    ['TikTok',    'https://www.tiktok.com/',    'tiktok/white'],
+                    ['TikTok',    'https://www.tiktok.com/',    'tiktok'],
                 ] as [$red, $url, $icono]): ?>
                     <li>
                         <a href="<?= $url ?>" target="_blank" rel="noopener noreferrer">
-                            <img src="https://cdn.simpleicons.org/<?= $icono ?>" alt="" width="20" height="20">
+                            <img src="<?= $rutaVista ?>img/redes/<?= $icono ?>.svg" alt="" width="20" height="20">
                             <?= $red ?>
                         </a>
                     </li>

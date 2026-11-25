@@ -10,15 +10,15 @@ $rutaVista = basename(dirname($_SERVER['SCRIPT_NAME'] ?? '')) === 'Vista' ? '' :
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars((string)$titulo, ENT_QUOTES, 'UTF-8') ?></title>
+    <link rel="icon" type="image/png" href="<?= $rutaVista ?>img/favicon.png">
     <link rel="stylesheet" href="<?= $rutaVista ?>css/estilos.css">
 </head>
 <body>
     <header class="site-header">
         <div class="contenedor header-contenido">
             <a href="index.php?accion=acerca" class="marca-logo" aria-label="Inicio Machine Line">
-                <span class="logo-icono" aria-hidden="true">ML</span>
                 <span class="logo-texto">
-                    <strong>Machine Line</strong>
+                    <img src="<?= $rutaVista ?>img/logo-blanco.png" alt="Machine Line" class="logo-img" height="34">
                     <small>Arrendadora de Autos</small>
                 </span>
             </a>
