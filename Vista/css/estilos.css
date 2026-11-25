@@ -1,9 +1,9 @@
 :root {
     --color-primario: #0f2942;
     --color-primario-oscuro: #091b2c;
-    --color-acento: #f59e0b;
-    --color-acento-hover: #d97706;
-    --color-acento-texto: #b45309; /* ámbar legible sobre fondo claro */
+    --color-acento: #2563eb;
+    --color-acento-hover: #1d4ed8;
+    --color-acento-texto: #1d4ed8;
     --color-fondo: #f8fafc;
     --color-superficie: #ffffff;
     --color-superficie-suave: #f8fafc;
@@ -90,7 +90,7 @@ a {
     height: 42px;
     border-radius: 10px;
     background-color: var(--color-acento);
-    color: var(--color-primario);
+    color: #ffffff;
     font-weight: 800;
     font-size: 1.05rem;
     letter-spacing: 0.04em;
@@ -143,7 +143,7 @@ a {
 
 .nav-enlace.activo {
     background-color: var(--color-acento);
-    color: var(--color-primario);
+    color: #ffffff;
 }
 
 /* Contenido principal */
@@ -172,7 +172,7 @@ a {
 
 .btn-primario {
     background-color: var(--color-acento);
-    color: var(--color-primario);
+    color: #ffffff;
 }
 
 .btn-primario:hover,
@@ -287,7 +287,7 @@ a {
     display: inline-block;
     padding: 4px 10px;
     border-radius: 999px;
-    background-color: #fff3eb;
+    background-color: #eff6ff;
     color: var(--color-acento-texto);
     font-size: 0.82rem;
     font-weight: 700;
