@@ -811,15 +811,12 @@ a {
     gap: 10px;
     color: #93c5fd;
     font-weight: 500;
-    text-decoration: underline;
-    text-decoration-color: rgba(147, 197, 253, 0.4);
-    text-underline-offset: 3px;
+    text-decoration: none;
 }
 
 .footer-redes a:hover,
 .footer-redes a:focus-visible {
     color: #ffffff;
-    text-decoration-color: #ffffff;
 }
 
 /* Responsivo */
