@@ -8,7 +8,8 @@ $accion = $accionActual ?? ($_GET['accion'] ?? 'acerca');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars((string)$titulo, ENT_QUOTES, 'UTF-8') ?></title>
-    <link rel="stylesheet" href="Vista/css/estilos.css">
+    <?php /* Funciona desde index.php (raíz) y abriendo la vista directa en Vista/ */ ?>
+    <link rel="stylesheet" href="<?= basename(dirname($_SERVER['SCRIPT_NAME'])) === 'Vista' ? 'css/estilos.css' : 'Vista/css/estilos.css' ?>">
 </head>
 <body>
     <header class="site-header">
