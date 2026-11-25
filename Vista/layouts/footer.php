@@ -36,5 +36,6 @@
     </footer>
     <?php $rutaVista = $rutaVista ?? (basename(dirname($_SERVER['SCRIPT_NAME'] ?? '')) === 'Vista' ? '' : 'Vista/'); ?>
     <script src="<?= $rutaVista ?>js/carrusel.js" defer></script>
+    <script src="<?= $rutaVista ?>js/skeleton.js" defer></script>
 </body>
 </html>
