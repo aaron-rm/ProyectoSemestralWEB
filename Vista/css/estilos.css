@@ -775,6 +775,25 @@ a {
     color: #ffffff;
 }
 
+.footer-redes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+}
+
+.footer-redes a {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.footer-redes a:hover,
+.footer-redes a:focus-visible {
+    color: #93c5fd;
+    text-decoration: underline;
+}
+
 /* Responsivo */
 @media (max-width: 1280px) {
     .hero-capa-contenido {
