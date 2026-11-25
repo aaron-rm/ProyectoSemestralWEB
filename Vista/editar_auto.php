@@ -1,12 +1,19 @@
 <?php
-// Eliminar este bloque al integrar con Controlador/AutoController.php
+/**
+ * Vista de edición de un vehículo existente.
+ * Muestra el formulario precargado con la placa en solo lectura.
+ * Recibe del controlador: $auto (array con placa, marca, modelo, kilometraje, id_cliente).
+ * Envía a: index.php?accion=actualizar (POST) o vuelve a index.php?accion=listar.
+ */
+
+// BORRAR AL INTEGRAR con Controlador/AutoController.php
 if (!isset($auto)) {
     $auto = [
         'placa' => 'AB-1234',
         'marca' => 'Toyota',
         'modelo' => 'SEDAN',
         'kilometraje' => 45000,
-        'id_cliente' => 1
+        'id_cliente' => 1,
     ];
 }
 
@@ -33,7 +40,7 @@ include __DIR__ . '/layouts/header.php';
             <input type="text"
                    id="placa"
                    name="placa"
-                   value="<?= htmlspecialchars((string)($auto['placa'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                   value="<?= e($auto['placa'] ?? '') ?>"
                    readonly
                    required>
             <small class="ayuda-campo">La placa identifica el vehículo y no puede modificarse.</small>
@@ -44,7 +51,7 @@ include __DIR__ . '/layouts/header.php';
             <input type="text"
                    id="marca"
                    name="marca"
-                   value="<?= htmlspecialchars((string)($auto['marca'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                   value="<?= e($auto['marca'] ?? '') ?>"
                    maxlength="50"
                    required>
         </div>
@@ -53,8 +60,8 @@ include __DIR__ . '/layouts/header.php';
             <label for="modelo">Modelo</label>
             <select id="modelo" name="modelo" required>
                 <?php foreach ($modelosDisponibles as $modeloOpt): ?>
-                    <option value="<?= htmlspecialchars($modeloOpt, ENT_QUOTES, 'UTF-8') ?>"<?= $modeloActual === $modeloOpt ? ' selected' : '' ?>>
-                        <?= htmlspecialchars($modeloOpt, ENT_QUOTES, 'UTF-8') ?>
+                    <option value="<?= e($modeloOpt) ?>"<?= $modeloActual === $modeloOpt ? ' selected' : '' ?>>
+                        <?= e($modeloOpt) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -65,7 +72,7 @@ include __DIR__ . '/layouts/header.php';
             <input type="number"
                    id="kilometraje"
                    name="kilometraje"
-                   value="<?= htmlspecialchars((string)($auto['kilometraje'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                   value="<?= e($auto['kilometraje'] ?? '') ?>"
                    min="0"
                    step="1"
                    required>
@@ -76,7 +83,7 @@ include __DIR__ . '/layouts/header.php';
             <input type="number"
                    id="id_cliente"
                    name="id_cliente"
-                   value="<?= htmlspecialchars((string)($auto['id_cliente'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                   value="<?= e($auto['id_cliente'] ?? '') ?>"
                    min="1"
                    step="1"
                    required>

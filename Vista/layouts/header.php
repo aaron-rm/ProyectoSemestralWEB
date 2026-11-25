@@ -1,7 +1,22 @@
 <?php
+/**
+ * Layout de cabecera común para todas las vistas.
+ * Muestra el <head>, la barra superior con logo y navegación, y abre <main>.
+ * Recibe (opcional): $tituloPagina (string), $accionActual (string).
+ * Enlaza a: index.php?accion=acerca|listar|agregar.
+ */
+
+// Escapa valores antes de imprimirlos en HTML para evitar XSS
+if (!function_exists('e')) {
+    function e($valor): string
+    {
+        return htmlspecialchars((string)$valor, ENT_QUOTES, 'UTF-8');
+    }
+}
+
 $titulo = $tituloPagina ?? 'Machine Line | Arrendadora de Autos';
 $accion = $accionActual ?? ($_GET['accion'] ?? 'acerca');
-/* Funciona desde index.php (raíz) y abriendo la vista directa en Vista/ */
+// Permite cargar CSS e imágenes desde index.php (raíz) o abriendo Vista/ directo
 $rutaVista = basename(dirname($_SERVER['SCRIPT_NAME'] ?? '')) === 'Vista' ? '' : 'Vista/';
 ?>
 <!DOCTYPE html>
@@ -9,7 +24,7 @@ $rutaVista = basename(dirname($_SERVER['SCRIPT_NAME'] ?? '')) === 'Vista' ? '' :
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars((string)$titulo, ENT_QUOTES, 'UTF-8') ?></title>
+    <title><?= e($titulo) ?></title>
     <link rel="icon" type="image/png" href="<?= $rutaVista ?>img/favicon.png">
     <link rel="stylesheet" href="<?= $rutaVista ?>css/estilos.css">
 </head>

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Vista de registro simultáneo de cliente y vehículo.
+ * Muestra un único formulario con validación HTML5 para ambos registros.
+ * No recibe variables del controlador; define $tituloPagina y $accionActual para header.php.
+ * Envía a: index.php?accion=guardar (POST) o enlaza a index.php?accion=listar.
+ */
 $modelosDisponibles = ['SEDAN', 'PICK-UP', 'SUB', 'BUSITO'];
 
 $tituloPagina = 'Agregar Auto y Cliente | Machine Line';
@@ -70,9 +76,7 @@ include __DIR__ . '/layouts/header.php';
                     <select id="modelo" name="modelo" required>
                         <option value="" disabled selected>Seleccione un modelo...</option>
                         <?php foreach ($modelosDisponibles as $modeloOpt): ?>
-                            <option value="<?= htmlspecialchars($modeloOpt, ENT_QUOTES, 'UTF-8') ?>">
-                                <?= htmlspecialchars($modeloOpt, ENT_QUOTES, 'UTF-8') ?>
-                            </option>
+                            <option value="<?= e($modeloOpt) ?>"><?= e($modeloOpt) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
