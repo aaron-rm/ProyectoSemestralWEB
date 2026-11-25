@@ -1,8 +1,11 @@
-// Muestra un skeleton en <main> mientras el servidor consulta la BD
-// (al ir al listado, editar un auto o aplicar el filtro).
+// Muestra un skeleton en <main> mientras el servidor consulta la BD (listar, editar o filtrar).
 (function () {
+    'use strict';
+
     var main = document.querySelector('main');
     if (!main) return;
+
+    // Se guarda el contenido inicial para restaurarlo si el usuario vuelve con el historial en caché.
     var original = main.innerHTML;
     var consultaBD = /accion=(listar|editar)\b/;
 
@@ -20,18 +23,20 @@
         window.scrollTo(0, 0);
     }
 
+    // Intercepta clics normales en enlaces de consulta; ignora nueva pestaña, modificadores o eventos cancelados.
     document.addEventListener('click', function (e) {
         var a = e.target.closest('a[href]');
-        if (!a || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || a.target === '_blank') return;
+        if (!a || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || a.target === '_blank') return;
         if (consultaBD.test(a.getAttribute('href'))) skeleton();
     });
 
+    // Muestra el skeleton al enviar el formulario de filtro de listado.
     document.addEventListener('submit', function (e) {
         var accion = e.target.querySelector('[name="accion"]');
         if (!e.defaultPrevented && accion && accion.value === 'listar') skeleton();
     });
 
-    // Al volver con el botón "atrás" el navegador restaura la página desde caché: quitar el skeleton.
+    // Restaura <main> cuando el navegador recupera la página desde bfcache al pulsar "atrás".
     window.addEventListener('pageshow', function (e) {
         if (e.persisted) main.innerHTML = original;
     });
