@@ -3,6 +3,14 @@
     <footer class="site-footer">
         <div class="contenedor footer-contenido">
             <p class="footer-marca"><img src="<?= $rutaVista ?>img/logo-blanco.png" alt="Machine Line" height="26"><br>Arrendadora de Autos</p>
+            <nav class="footer-redes footer-paginas" aria-label="Páginas del sitio">
+                <strong>Páginas</strong>
+                <ul>
+                    <li><a href="index.php?accion=acerca">Acerca de</a></li>
+                    <li><a href="index.php?accion=listar">Mostrar autos</a></li>
+                    <li><a href="index.php?accion=agregar">Agregar autos</a></li>
+                </ul>
+            </nav>
             <nav class="footer-redes" aria-label="Redes sociales">
                 <strong>Síguenos</strong>
                 <ul>
