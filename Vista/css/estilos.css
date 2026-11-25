@@ -775,14 +775,32 @@ a {
     color: #ffffff;
 }
 
-.footer-redes {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px 14px;
+.footer-copy {
+    flex-basis: 100%;
+    text-align: center;
+    padding-top: 12px;
+    margin-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-redes strong {
+    display: block;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.footer-redes ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
 }
 
 .footer-redes a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     color: #ffffff;
     font-weight: 600;
     text-decoration: none;
