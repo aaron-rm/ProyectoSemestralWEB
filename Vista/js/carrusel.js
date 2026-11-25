@@ -15,7 +15,7 @@
         return;
     }
 
-    const INTERVALO_MS = 5000;
+    const INTERVALO_MS = 7000;
     const preferenciaMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     let indiceActual = slides.findIndex((slide) => slide.classList.contains('activo'));
