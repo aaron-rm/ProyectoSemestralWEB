@@ -1,5 +1,12 @@
 <?php
-// Eliminar este bloque al integrar con Controlador/AutoController.php
+/*
+ * Vista de edición de vehículo: muestra el formulario precargado con la placa en solo lectura.
+ * Recibe del controlador: $auto (placa, marca, modelo, kilometraje, id_cliente).
+ * Define para header.php: $tituloPagina, $accionActual.
+ * Envía a: POST index.php?accion=actualizar (y vuelve a index.php?accion=listar).
+ */
+
+// BORRAR AL INTEGRAR
 if (!isset($auto)) {
     $auto = [
         'placa' => 'AB-1234',
@@ -30,56 +37,32 @@ include __DIR__ . '/layouts/header.php';
     <form method="post" action="index.php?accion=actualizar" class="formulario-grid">
         <div class="campo">
             <label for="placa">Placa</label>
-            <input type="text"
-                   id="placa"
-                   name="placa"
-                   value="<?= htmlspecialchars((string)($auto['placa'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
-                   readonly
-                   required>
+            <input type="text" id="placa" name="placa" value="<?= e($auto['placa'] ?? '') ?>" readonly required>
             <small class="ayuda-campo">La placa identifica el vehículo y no puede modificarse.</small>
         </div>
 
         <div class="campo">
             <label for="marca">Marca</label>
-            <input type="text"
-                   id="marca"
-                   name="marca"
-                   value="<?= htmlspecialchars((string)($auto['marca'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
-                   maxlength="50"
-                   required>
+            <input type="text" id="marca" name="marca" value="<?= e($auto['marca'] ?? '') ?>" maxlength="50" required>
         </div>
 
         <div class="campo">
             <label for="modelo">Modelo</label>
             <select id="modelo" name="modelo" required>
                 <?php foreach ($modelosDisponibles as $modeloOpt): ?>
-                    <option value="<?= htmlspecialchars($modeloOpt, ENT_QUOTES, 'UTF-8') ?>"<?= $modeloActual === $modeloOpt ? ' selected' : '' ?>>
-                        <?= htmlspecialchars($modeloOpt, ENT_QUOTES, 'UTF-8') ?>
-                    </option>
+                    <option value="<?= e($modeloOpt) ?>"<?= $modeloActual === $modeloOpt ? ' selected' : '' ?>><?= e($modeloOpt) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
 
         <div class="campo">
             <label for="kilometraje">Kilometraje (km)</label>
-            <input type="number"
-                   id="kilometraje"
-                   name="kilometraje"
-                   value="<?= htmlspecialchars((string)($auto['kilometraje'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
-                   min="0"
-                   step="1"
-                   required>
+            <input type="number" id="kilometraje" name="kilometraje" value="<?= e($auto['kilometraje'] ?? '') ?>" min="0" step="1" required>
         </div>
 
         <div class="campo campo-completo">
             <label for="id_cliente">ID del Cliente</label>
-            <input type="number"
-                   id="id_cliente"
-                   name="id_cliente"
-                   value="<?= htmlspecialchars((string)($auto['id_cliente'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
-                   min="1"
-                   step="1"
-                   required>
+            <input type="number" id="id_cliente" name="id_cliente" value="<?= e($auto['id_cliente'] ?? '') ?>" min="1" step="1" required>
         </div>
 
         <div class="acciones-formulario">
