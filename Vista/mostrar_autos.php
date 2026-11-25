@@ -1,19 +1,12 @@
 <?php
-/**
- * Vista de listado e inventario de autos.
- * Muestra el filtro por modelo (GET) y la tabla de vehículos con acciones por fila.
- * Recibe del controlador: $autos (array de autos). Lee $_GET['modelo'] para conservar el filtro.
- * Envía a: index.php?accion=listar (GET), agregar, editar&placa= y eliminar&placa=.
- */
-
-// BORRAR AL INTEGRAR con Controlador/AutoController.php
+// Eliminar este bloque al integrar con Controlador/AutoController.php
 if (!isset($autos)) {
     $autos = [
-        ['placa' => 'AB-1234', 'marca' => 'Toyota', 'modelo' => 'SEDAN', 'kilometraje' => 45000, 'id_cliente' => 1, 'nombre_cliente' => 'Ana Pérez'],
+        ['placa' => 'AB-1234', 'marca' => 'Toyota', 'modelo' => 'SEDAN', 'kilometraje' => 45000, 'id_cliente' => 1, 'nombre_cliente' => 'Ana Pérez']
     ];
 }
 
-$modeloSeleccionado = $_GET['modelo'] ?? '';
+$modeloSeleccionado = $_GET['modelo'] ?? ($_POST['modelo'] ?? '');
 $modelosDisponibles = ['SEDAN', 'PICK-UP', 'SUB', 'BUSITO'];
 
 $tituloPagina = 'Mostrar Autos | Machine Line';
@@ -37,8 +30,8 @@ include __DIR__ . '/layouts/header.php';
             <select name="modelo" id="modelo">
                 <option value=""<?= ($modeloSeleccionado === '' || $modeloSeleccionado === 'Todos') ? ' selected' : '' ?>>Todos</option>
                 <?php foreach ($modelosDisponibles as $modeloOpt): ?>
-                    <option value="<?= e($modeloOpt) ?>"<?= $modeloSeleccionado === $modeloOpt ? ' selected' : '' ?>>
-                        <?= e($modeloOpt) ?>
+                    <option value="<?= htmlspecialchars($modeloOpt, ENT_QUOTES, 'UTF-8') ?>"<?= $modeloSeleccionado === $modeloOpt ? ' selected' : '' ?>>
+                        <?= htmlspecialchars($modeloOpt, ENT_QUOTES, 'UTF-8') ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -76,22 +69,30 @@ include __DIR__ . '/layouts/header.php';
                 </thead>
                 <tbody>
                     <?php foreach ($autos as $auto): ?>
-                        <?php $placa = (string)($auto['placa'] ?? ''); ?>
+                        <?php
+                        $placa = (string)($auto['placa'] ?? '');
+                        $marca = (string)($auto['marca'] ?? '');
+                        $modelo = (string)($auto['modelo'] ?? '');
+                        $kilometraje = (int)($auto['kilometraje'] ?? 0);
+                        $idCliente = (string)($auto['id_cliente'] ?? '');
+                        $nombreCliente = (string)($auto['nombre_cliente'] ?? '');
+                        $placaUrl = urlencode($placa);
+                        $mensajeConfirm = '¿Está seguro de eliminar el vehículo con placa ' . $placa . '?';
+                        ?>
                         <tr>
-                            <td class="celda-placa"><?= e($placa) ?></td>
-                            <td><?= e($auto['marca'] ?? '') ?></td>
-                            <td><span class="badge-modelo"><?= e($auto['modelo'] ?? '') ?></span></td>
-                            <td><?= e(number_format((int)($auto['kilometraje'] ?? 0), 0, '.', ',') . ' km') ?></td>
-                            <td><?= e($auto['id_cliente'] ?? '') ?></td>
-                            <td><?= e($auto['nombre_cliente'] ?? '') ?></td>
+                            <td class="celda-placa"><?= htmlspecialchars($placa, ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($marca, ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><span class="badge badge-modelo"><?= htmlspecialchars($modelo, ENT_QUOTES, 'UTF-8') ?></span></td>
+                            <td><?= htmlspecialchars(number_format($kilometraje, 0, '.', ',') . ' km', ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($idCliente, ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($nombreCliente, ENT_QUOTES, 'UTF-8') ?></td>
                             <td class="celda-acciones">
-                                <a href="index.php?accion=editar&amp;placa=<?= e(urlencode($placa)) ?>" class="btn btn-sm btn-editar">
+                                <a href="index.php?accion=editar&amp;placa=<?= htmlspecialchars($placaUrl, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-sm btn-editar">
                                     Editar
                                 </a>
-                                <!-- Confirmación en línea para evitar borrados accidentales sin usar archivo .js -->
-                                <a href="index.php?accion=eliminar&amp;placa=<?= e(urlencode($placa)) ?>"
+                                <a href="index.php?accion=eliminar&amp;placa=<?= htmlspecialchars($placaUrl, ENT_QUOTES, 'UTF-8') ?>"
                                    class="btn btn-sm btn-eliminar"
-                                   onclick="return confirm(<?= e(json_encode('¿Está seguro de eliminar el vehículo con placa ' . $placa . '?', JSON_UNESCAPED_UNICODE)) ?>);">
+                                   onclick="return confirm(<?= htmlspecialchars(json_encode($mensajeConfirm, JSON_UNESCAPED_UNICODE), ENT_QUOTES, 'UTF-8') ?>);">
                                     Eliminar
                                 </a>
                             </td>
