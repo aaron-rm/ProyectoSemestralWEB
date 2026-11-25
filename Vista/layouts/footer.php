@@ -2,7 +2,7 @@
 
     <footer class="site-footer">
         <div class="contenedor footer-contenido">
-            <p class="footer-marca"><img src="<?= $rutaVista ?>img/logo-blanco.png" alt="Machine Line" height="26"><br>Arrendadora de Autos</p>
+            <p class="footer-marca"><a href="index.php"><img src="<?= $rutaVista ?>img/logo-blanco.png" alt="Machine Line - Inicio" height="26"></a><br>Arrendadora de Autos</p>
             <nav class="footer-redes footer-paginas" aria-label="Páginas del sitio">
                 <strong>Páginas</strong>
                 <ul>
