@@ -25,9 +25,9 @@ include __DIR__ . '/layouts/header.php';
                 <path d="M32 82 L44 54 C48 46 57 41 69 41 L140 41 C154 41 164 46 173 56 L204 62 C211 64 216 70 216 77 L216 82" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M72 41 L64 60 L158 60 L146 41" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
                 <line x1="108" y1="41" x2="108" y2="60" stroke="currentColor" stroke-width="3"/>
-                <circle cx="68" cy="86" r="16" fill="var(--color-superficie)" stroke="currentColor" stroke-width="5"/>
+                <circle cx="68" cy="86" r="16" fill="#ffffff" stroke="currentColor" stroke-width="5"/>
                 <circle cx="68" cy="86" r="6" fill="currentColor"/>
-                <circle cx="176" cy="86" r="16" fill="var(--color-superficie)" stroke="currentColor" stroke-width="5"/>
+                <circle cx="176" cy="86" r="16" fill="#ffffff" stroke="currentColor" stroke-width="5"/>
                 <circle cx="176" cy="86" r="6" fill="currentColor"/>
             </svg>
             <div class="metricas-hero">
