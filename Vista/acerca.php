@@ -4,47 +4,93 @@ $accionActual = 'acerca';
 include __DIR__ . '/layouts/header.php';
 ?>
 
-<section class="hero">
-    <div class="hero-texto">
-        <span class="etiqueta-hero">Tu camino, nuestra flota</span>
-        <h1>Bienvenido a <span>Machine Line</span></h1>
-        <p class="hero-descripcion">
-            Somos una arrendadora de autos enfocada en ofrecer vehículos confiables,
-            mantenimiento certificado y una atención ágil para viajes personales,
-            corporativos y de carga ligera.
-        </p>
-        <div class="hero-acciones">
-            <a href="index.php?accion=listar" class="btn btn-primario">Explorar flota</a>
-            <a href="index.php?accion=agregar" class="btn btn-secundario">Registrar auto y cliente</a>
-        </div>
+<?php
+$slidesHero = [
+    ['imagen' => 'img/hero-1.jpg', 'alt' => 'Station wagon verde azulado circulando por carretera'],
+    ['imagen' => 'img/hero-2.jpg', 'alt' => 'Minivan roja estacionada frente a un edificio moderno'],
+    ['imagen' => 'img/hero-3.jpg', 'alt' => 'Minivan roja en un camino rodeado de árboles de otoño'],
+    ['imagen' => 'img/hero-4.jpg', 'alt' => 'Familia sonriente viajando dentro de un auto'],
+    ['imagen' => 'img/hero-5.jpg', 'alt' => 'Familia sentada en el maletero abierto de un auto blanco en el bosque'],
+    ['imagen' => 'img/hero-6.jpg', 'alt' => 'Familia saludando desde las ventanas de un auto rojo al atardecer'],
+];
+?>
+
+<section
+    class="hero-carrusel"
+    data-carrusel
+    tabindex="0"
+    aria-roledescription="carrusel"
+    aria-label="Galería principal de Machine Line"
+>
+    <div class="carrusel-pista">
+        <?php foreach ($slidesHero as $indice => $slide): ?>
+            <?php $esPrimero = $indice === 0; ?>
+            <div
+                class="carrusel-slide<?= $esPrimero ? ' activo' : '' ?>"
+                aria-hidden="<?= $esPrimero ? 'false' : 'true' ?>"
+            >
+                <img
+                    src="<?= htmlspecialchars($rutaVista . $slide['imagen'], ENT_QUOTES, 'UTF-8') ?>"
+                    alt="<?= htmlspecialchars($slide['alt'], ENT_QUOTES, 'UTF-8') ?>"
+                    <?= $esPrimero ? '' : 'loading="lazy" ' ?>decoding="async"
+                >
+            </div>
+        <?php endforeach; ?>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-        <div class="tarjeta-resumen-flota">
-            <svg viewBox="0 0 240 120" class="ilustracion-auto" role="img" aria-label="Silueta de vehículo Machine Line">
-                <path d="M25 82 L38 52 C43 42 54 36 68 36 L142 36 C158 36 170 42 180 54 L208 60 C216 62 222 69 222 78 L222 86 L20 86 Z" fill="currentColor" opacity="0.16"/>
-                <path d="M32 82 L44 54 C48 46 57 41 69 41 L140 41 C154 41 164 46 173 56 L204 62 C211 64 216 70 216 77 L216 82" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M72 41 L64 60 L158 60 L146 41" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
-                <line x1="108" y1="41" x2="108" y2="60" stroke="currentColor" stroke-width="3"/>
-                <circle cx="68" cy="86" r="16" fill="#ffffff" stroke="currentColor" stroke-width="5"/>
-                <circle cx="68" cy="86" r="6" fill="currentColor"/>
-                <circle cx="176" cy="86" r="16" fill="#ffffff" stroke="currentColor" stroke-width="5"/>
-                <circle cx="176" cy="86" r="6" fill="currentColor"/>
-            </svg>
-            <div class="metricas-hero">
-                <div>
-                    <strong>4</strong>
-                    <span>Categorías</span>
-                </div>
-                <div>
-                    <strong>100%</strong>
-                    <span>Revisados</span>
-                </div>
-                <div>
-                    <strong>24/7</strong>
-                    <span>Asistencia</span>
+
+    <div class="hero-degradado" aria-hidden="true"></div>
+
+    <div class="hero-capa-contenido">
+        <div class="contenedor">
+            <div class="hero-contenido">
+                <span class="etiqueta-hero">Machine Line</span>
+                <h1>Más espacio para tu familia, más kilómetros para tus historias.</h1>
+                <p class="hero-descripcion">
+                    Somos una arrendadora de autos enfocada en ofrecer vehículos confiables,
+                    mantenimiento certificado y una atención ágil para viajes personales,
+                    corporativos y de carga ligera.
+                </p>
+                <div class="hero-acciones">
+                    <a href="index.php?accion=listar" class="btn btn-primario">Explorar flota</a>
+                    <a href="index.php?accion=agregar" class="btn btn-secundario">Registrar auto y cliente</a>
                 </div>
             </div>
         </div>
+    </div>
+
+    <button
+        type="button"
+        class="carrusel-btn carrusel-btn-anterior"
+        data-carrusel-anterior
+        aria-label="Imagen anterior"
+    >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+
+    <button
+        type="button"
+        class="carrusel-btn carrusel-btn-siguiente"
+        data-carrusel-siguiente
+        aria-label="Imagen siguiente"
+    >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+
+    <div class="carrusel-indicadores" role="group" aria-label="Seleccionar imagen del carrusel">
+        <?php foreach ($slidesHero as $indice => $slide): ?>
+            <?php $numero = $indice + 1; ?>
+            <button
+                type="button"
+                class="carrusel-punto<?= $indice === 0 ? ' activo' : '' ?>"
+                data-carrusel-indice="<?= $indice ?>"
+                aria-label="Ir a imagen <?= $numero ?>"
+                <?= $indice === 0 ? 'aria-current="true"' : '' ?>
+            ></button>
+        <?php endforeach; ?>
     </div>
 </section>
 

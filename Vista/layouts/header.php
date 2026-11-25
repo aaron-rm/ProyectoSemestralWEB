@@ -1,6 +1,8 @@
 <?php
 $titulo = $tituloPagina ?? 'Machine Line | Arrendadora de Autos';
 $accion = $accionActual ?? ($_GET['accion'] ?? 'acerca');
+/* Funciona desde index.php (raíz) y abriendo la vista directa en Vista/ */
+$rutaVista = basename(dirname($_SERVER['SCRIPT_NAME'] ?? '')) === 'Vista' ? '' : 'Vista/';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -8,8 +10,7 @@ $accion = $accionActual ?? ($_GET['accion'] ?? 'acerca');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars((string)$titulo, ENT_QUOTES, 'UTF-8') ?></title>
-    <?php /* Funciona desde index.php (raíz) y abriendo la vista directa en Vista/ */ ?>
-    <link rel="stylesheet" href="<?= basename(dirname($_SERVER['SCRIPT_NAME'])) === 'Vista' ? 'css/estilos.css' : 'Vista/css/estilos.css' ?>">
+    <link rel="stylesheet" href="<?= $rutaVista ?>css/estilos.css">
 </head>
 <body>
     <header class="site-header">
