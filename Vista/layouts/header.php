@@ -1,4 +1,10 @@
 <?php
+// Si se abre una vista directamente desde Vista/, redirige al index.php de la raíz
+if (isset($_SERVER['SCRIPT_NAME']) && basename(dirname($_SERVER['SCRIPT_NAME'])) === 'Vista') {
+    header('Location: ../index.php');
+    exit;
+}
+
 if (isset($tituloPagina)) {
     $titulo = $tituloPagina;
 } else {
@@ -13,18 +19,7 @@ if (isset($accionActual)) {
     $accion = 'acerca';
 }
 
-// Ruta base para CSS/imágenes: vacía si se carga desde Vista/, 'Vista/' si se carga desde la raíz (index.php)
-if (!isset($rutaVista)) {
-    $directorio = '';
-    if (isset($_SERVER['SCRIPT_NAME'])) {
-        $directorio = dirname($_SERVER['SCRIPT_NAME']);
-    }
-    if (basename($directorio) === 'Vista') {
-        $rutaVista = '';
-    } else {
-        $rutaVista = 'Vista/';
-    }
-}
+$rutaVista = 'Vista/';
 ?>
 <!DOCTYPE html>
 <html lang="es">

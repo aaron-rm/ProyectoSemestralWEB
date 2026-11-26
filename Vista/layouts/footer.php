@@ -1,24 +1,6 @@
 <?php
-// Ruta base para CSS/imágenes: vacía si se carga desde index.php (raíz), 'Vista/' si no
-if (isset($rutaVista)) {
-    // Si $rutaVista ya existe, no hacemos nada.
-} else {
-    if (isset($_SERVER['SCRIPT_NAME'])) {
-        // Obtiene la ruta del directorio donde se ejecuta el archivo.
-        $directorio = dirname($_SERVER['SCRIPT_NAME']);
-    } else {
-        // Si no está disponible la ruta, utiliza el directorio actual.
-        $directorio = dirname('');
-    }
-
-    // Obtiene solamente el nombre del directorio padre.
-    $nombreDirectorio = basename($directorio);
-
-    if ($nombreDirectorio === 'Vista') {
-        $rutaVista = '';
-    } else {
-        $rutaVista = 'Vista/';
-    }
+if (!isset($rutaVista)) {
+    $rutaVista = 'Vista/';
 }
 
 $redes = [
