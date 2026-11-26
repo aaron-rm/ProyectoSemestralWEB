@@ -1,9 +1,4 @@
 <?php
-/*
- * Vista principal "Acerca de": muestra el carrusel hero, identidad de la empresa, categorías y contacto.
- * Variables para header.php: $tituloPagina, $accionActual (usa $rutaVista definida en header.php).
- * Enlaza a: index.php?accion=listar (y con &modelo=...), index.php?accion=agregar.
- */
 $tituloPagina = 'Acerca de | Machine Line';
 $accionActual = 'acerca';
 include __DIR__ . '/layouts/header.php';
@@ -25,12 +20,12 @@ $categorias = [
 ];
 ?>
 
-<section class="hero-carrusel" data-carrusel tabindex="0" aria-roledescription="carrusel" aria-label="Galería principal de Machine Line">
+<!-- Carrusel hero con autoplay CSS puro (6 slides, ~7s cada uno = 42s ciclo) -->
+<section class="hero-carrusel" aria-label="Galería principal de Machine Line">
     <div class="carrusel-pista">
         <?php foreach ($slidesHero as $indice => $slide): ?>
-            <?php $esPrimero = $indice === 0; ?>
-            <div class="carrusel-slide<?= $esPrimero ? ' activo' : '' ?>" aria-hidden="<?= $esPrimero ? 'false' : 'true' ?>">
-                <img src="<?= e($rutaVista . $slide['imagen']) ?>" alt="<?= e($slide['alt']) ?>" <?= $esPrimero ? '' : 'loading="lazy" ' ?>decoding="async">
+            <div class="carrusel-slide carrusel-slide-<?= $indice ?>">
+                <img src="<?= e($rutaVista . $slide['imagen']) ?>" alt="<?= e($slide['alt']) ?>" <?= $indice > 0 ? 'loading="lazy" ' : '' ?>decoding="async">
             </div>
         <?php endforeach; ?>
     </div>
@@ -53,30 +48,6 @@ $categorias = [
                 </div>
             </div>
         </div>
-    </div>
-
-    <button type="button" class="carrusel-btn carrusel-btn-anterior" data-carrusel-anterior aria-label="Imagen anterior">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-    </button>
-
-    <button type="button" class="carrusel-btn carrusel-btn-siguiente" data-carrusel-siguiente aria-label="Imagen siguiente">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-    </button>
-
-    <div class="carrusel-indicadores" role="group" aria-label="Seleccionar imagen del carrusel">
-        <?php foreach ($slidesHero as $indice => $slide): ?>
-            <button
-                type="button"
-                class="carrusel-punto<?= $indice === 0 ? ' activo' : '' ?>"
-                data-carrusel-indice="<?= $indice ?>"
-                aria-label="Ir a imagen <?= $indice + 1 ?>"
-                <?= $indice === 0 ? 'aria-current="true"' : '' ?>
-            ></button>
-        <?php endforeach; ?>
     </div>
 </section>
 

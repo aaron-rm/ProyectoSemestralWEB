@@ -1,12 +1,5 @@
 <?php
-/*
- * Vista de listado de vehículos: muestra el inventario filtrado por modelo y acciones Editar/Eliminar.
- * Recibe del controlador: $autos (lista de arreglos con placa, marca, modelo, kilometraje, id_cliente, nombre_cliente).
- * Define para header.php: $tituloPagina, $accionActual.
- * Envía/enlaza a: GET index.php?accion=listar (&modelo=), agregar, editar&placa=, eliminar&placa=.
- */
-
-// BORRAR AL INTEGRAR
+// Datos de prueba — BORRAR AL INTEGRAR con el Controlador
 if (!isset($autos)) {
     $autos = [
         ['placa' => 'AB-1234', 'marca' => 'Toyota', 'modelo' => 'SEDAN', 'kilometraje' => 45000, 'id_cliente' => 1, 'nombre_cliente' => 'Ana Pérez']
@@ -30,6 +23,7 @@ include __DIR__ . '/layouts/header.php';
         <a href="index.php?accion=agregar" class="btn btn-primario">+ Agregar auto</a>
     </div>
 
+    <!-- Filtro por modelo -->
     <form method="get" action="index.php" class="barra-filtro">
         <input type="hidden" name="accion" value="listar">
         <div class="campo-filtro">
@@ -49,6 +43,7 @@ include __DIR__ . '/layouts/header.php';
         </div>
     </form>
 
+    <!-- Tabla de resultados o estado vacío -->
     <?php if (empty($autos)): ?>
         <div class="estado-vacio">
             <h2>No hay autos registrados</h2>
@@ -74,11 +69,7 @@ include __DIR__ . '/layouts/header.php';
                 </thead>
                 <tbody>
                     <?php foreach ($autos as $auto): ?>
-                        <?php
-                        $placa = (string)($auto['placa'] ?? '');
-                        $placaUrl = urlencode($placa);
-                        $mensajeConfirm = '¿Está seguro de eliminar el vehículo con placa ' . $placa . '?';
-                        ?>
+                        <?php $placa = (string)($auto['placa'] ?? ''); ?>
                         <tr>
                             <td class="celda-placa"><?= e($placa) ?></td>
                             <td><?= e($auto['marca'] ?? '') ?></td>
@@ -87,10 +78,10 @@ include __DIR__ . '/layouts/header.php';
                             <td><?= e($auto['id_cliente'] ?? '') ?></td>
                             <td><?= e($auto['nombre_cliente'] ?? '') ?></td>
                             <td class="celda-acciones">
-                                <a href="index.php?accion=editar&amp;placa=<?= e($placaUrl) ?>" class="btn btn-sm btn-editar">Editar</a>
-                                <a href="index.php?accion=eliminar&amp;placa=<?= e($placaUrl) ?>"
+                                <a href="index.php?accion=editar&amp;placa=<?= e(urlencode($placa)) ?>" class="btn btn-sm btn-editar">Editar</a>
+                                <a href="index.php?accion=eliminar&amp;placa=<?= e(urlencode($placa)) ?>"
                                    class="btn btn-sm btn-eliminar"
-                                   onclick="return confirm(<?= e(json_encode($mensajeConfirm, JSON_UNESCAPED_UNICODE)) ?>);">Eliminar</a>
+                                   onclick="return confirm('¿Está seguro de eliminar el vehículo con placa <?= e($placa) ?>?');">Eliminar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

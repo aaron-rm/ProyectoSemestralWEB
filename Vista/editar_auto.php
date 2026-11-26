@@ -1,19 +1,12 @@
 <?php
-/*
- * Vista de edición de vehículo: muestra el formulario precargado con la placa en solo lectura.
- * Recibe del controlador: $auto (placa, marca, modelo, kilometraje, id_cliente).
- * Define para header.php: $tituloPagina, $accionActual.
- * Envía a: POST index.php?accion=actualizar (y vuelve a index.php?accion=listar).
- */
-
-// BORRAR AL INTEGRAR
+// Datos de prueba — BORRAR AL INTEGRAR con el Controlador
 if (!isset($auto)) {
     $auto = [
-        'placa' => 'AB-1234',
-        'marca' => 'Toyota',
-        'modelo' => 'SEDAN',
+        'placa'       => 'AB-1234',
+        'marca'       => 'Toyota',
+        'modelo'      => 'SEDAN',
         'kilometraje' => 45000,
-        'id_cliente' => 1
+        'id_cliente'  => 1
     ];
 }
 

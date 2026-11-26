@@ -1,21 +1,17 @@
 <?php
-/*
- * Cabecera compartida del sitio: define e(), abre el HTML y muestra barra de navegación.
- * Recibe (opcionales): $tituloPagina, $accionActual, $rutaVista.
- * Enlaza a: index.php?accion=acerca | listar | agregar.
- */
-$titulo = $tituloPagina ?? 'Machine Line | Arrendadora de Autos';
-$accion = $accionActual ?? ($_GET['accion'] ?? 'acerca');
-// Permite cargar CSS/JS/imágenes tanto desde index.php (raíz) como abriendo Vista/ directo.
-$rutaVista = $rutaVista ?? (basename(dirname($_SERVER['SCRIPT_NAME'] ?? '')) === 'Vista' ? '' : 'Vista/');
-
+// Escapa texto para imprimirlo de forma segura en HTML
 if (!function_exists('e')) {
-    // Escapa texto para imprimirlo de forma segura en HTML.
     function e($valor): string
     {
         return htmlspecialchars((string)$valor, ENT_QUOTES, 'UTF-8');
     }
 }
+
+$titulo = $tituloPagina ?? 'Machine Line | Arrendadora de Autos';
+$accion = $accionActual ?? ($_GET['accion'] ?? 'acerca');
+
+// Ruta base para CSS/JS/imágenes: vacía si se carga desde index.php (raíz), 'Vista/' si no
+$rutaVista = $rutaVista ?? (basename(dirname($_SERVER['SCRIPT_NAME'] ?? '')) === 'Vista' ? '' : 'Vista/');
 ?>
 <!DOCTYPE html>
 <html lang="es">

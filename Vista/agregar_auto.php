@@ -1,9 +1,4 @@
 <?php
-/*
- * Vista de registro conjunto: muestra un único formulario para dar de alta cliente y vehículo.
- * Define para header.php: $tituloPagina, $accionActual.
- * Envía a: POST index.php?accion=guardar (y enlaza a index.php?accion=listar).
- */
 $modelosDisponibles = ['SEDAN', 'PICK-UP', 'SUB', 'BUSITO'];
 
 $tituloPagina = 'Agregar Auto y Cliente | Machine Line';
@@ -28,7 +23,6 @@ include __DIR__ . '/layouts/header.php';
                     <label for="id_cliente">ID del Cliente</label>
                     <input type="number" id="id_cliente" name="id_cliente" min="1" step="1" placeholder="Ej. 1" required>
                 </div>
-
                 <div class="campo">
                     <label for="nombre_cliente">Nombre del Cliente</label>
                     <input type="text" id="nombre_cliente" name="nombre_cliente" maxlength="100" placeholder="Ej. Ana Pérez" required>
@@ -43,12 +37,10 @@ include __DIR__ . '/layouts/header.php';
                     <label for="placa">Placa</label>
                     <input type="text" id="placa" name="placa" maxlength="20" placeholder="Ej. AB-1234" required>
                 </div>
-
                 <div class="campo">
                     <label for="marca">Marca</label>
                     <input type="text" id="marca" name="marca" maxlength="50" placeholder="Ej. Toyota" required>
                 </div>
-
                 <div class="campo">
                     <label for="modelo">Modelo</label>
                     <select id="modelo" name="modelo" required>
@@ -58,7 +50,6 @@ include __DIR__ . '/layouts/header.php';
                         <?php endforeach; ?>
                     </select>
                 </div>
-
                 <div class="campo">
                     <label for="kilometraje">Kilometraje (km)</label>
                     <input type="number" id="kilometraje" name="kilometraje" min="0" step="1" placeholder="Ej. 45000" required>

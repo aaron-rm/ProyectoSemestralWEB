@@ -1,10 +1,7 @@
 <?php
-/*
- * Pie de página compartido: cierra <main>, muestra marca, enlaces, redes sociales y carga los scripts JS.
- * Usa: $rutaVista (definida en header.php o calculada como respaldo).
- * Enlaza a: index.php y index.php?accion=acerca | listar | agregar.
- */
+// Ruta base (respaldo si no vino de header.php)
 $rutaVista = $rutaVista ?? (basename(dirname($_SERVER['SCRIPT_NAME'] ?? '')) === 'Vista' ? '' : 'Vista/');
+
 $redes = [
     ['Facebook',  'https://www.facebook.com/',  'facebook'],
     ['Instagram', 'https://www.instagram.com/', 'instagram'],
@@ -45,7 +42,5 @@ $redes = [
             <p class="footer-copy">&copy; <?= function_exists('e') ? e(date('Y')) : date('Y') ?> Machine Line. Movilidad confiable para cada camino.</p>
         </div>
     </footer>
-    <script src="<?= $rutaVista ?>js/carrusel.js" defer></script>
-    <script src="<?= $rutaVista ?>js/skeleton.js" defer></script>
 </body>
 </html>
