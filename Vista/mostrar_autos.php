@@ -1,11 +1,4 @@
 <?php
-// Datos de prueba — BORRAR AL INTEGRAR con el Controlador
-if (!isset($autos)) {
-    $autos = [
-        ['placa' => 'AB-1234', 'marca' => 'Toyota', 'modelo' => 'SEDAN', 'kilometraje' => 45000, 'id_cliente' => 1, 'nombre_cliente' => 'Ana Pérez']
-    ];
-}
-
 if (isset($_GET['modelo'])) {
     $modeloSeleccionado = $_GET['modelo'];
 } elseif (isset($_POST['modelo'])) {

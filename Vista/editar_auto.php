@@ -1,15 +1,4 @@
 <?php
-// Datos de prueba — BORRAR AL INTEGRAR con el Controlador
-if (!isset($auto)) {
-    $auto = [
-        'placa'       => 'AB-1234',
-        'marca'       => 'Toyota',
-        'modelo'      => 'SEDAN',
-        'kilometraje' => 45000,
-        'id_cliente'  => 1
-    ];
-}
-
 $modelosDisponibles = ['SEDAN', 'PICK-UP', 'SUB', 'BUSITO'];
 
 if (isset($auto['modelo'])) {
