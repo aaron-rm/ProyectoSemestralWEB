@@ -5,33 +5,11 @@ require_once __DIR__ . '/../Modelo/AutoModel.php';
 
 if ($accion === 'listar') {
     $modelo = '';
-    $placa = '';
-    $id_cliente = '';
-    $seBusco = false;
-
-    // Opciones para los selectores de placa y cliente
-    $placasDisponibles = listarPlacas($conexion);
-    $clientesDisponibles = listarClientes($conexion);
-
-    // Solo consulta los autos cuando el usuario busca o pulsa "Mostrar todos"
-    if (isset($_GET['modelo']) || isset($_GET['placa']) || isset($_GET['id_cliente'])) {
-        $seBusco = true;
-        if (isset($_GET['modelo'])) {
-            $modelo = trim($_GET['modelo']);
-        }
-        if (isset($_GET['placa'])) {
-            $placa = trim($_GET['placa']);
-        }
-        if (isset($_GET['id_cliente'])) {
-            $id_cliente = trim($_GET['id_cliente']);
-        }
+    if (isset($_GET['modelo'])) {
+        $modelo = trim($_GET['modelo']);
     }
 
-    $autos = [];
-    if ($seBusco) {
-        $autos = listarAutos($conexion, $modelo, $placa, $id_cliente);
-    }
-
+    $autos = listarAutos($conexion, $modelo);
     include __DIR__ . '/../Vista/mostrar_autos.php';
 
 } elseif ($accion === 'agregar') {
