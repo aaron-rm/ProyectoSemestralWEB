@@ -1,10 +1,18 @@
 <?php
 if (isset($_GET['modelo'])) {
     $modeloSeleccionado = $_GET['modelo'];
-} elseif (isset($_POST['modelo'])) {
-    $modeloSeleccionado = $_POST['modelo'];
 } else {
     $modeloSeleccionado = '';
+}
+
+if (isset($_GET['placa'])) {
+    $placaBuscada = $_GET['placa'];
+} else {
+    $placaBuscada = '';
+}
+
+if (!isset($seBusco)) {
+    $seBusco = false;
 }
 
 $modelosDisponibles = ['SEDAN', 'PICK-UP', 'SUB', 'BUSITO'];
@@ -18,16 +26,16 @@ include __DIR__ . '/layouts/header.php';
     <div class="encabezado-pagina">
         <div>
             <h1>Inventario de Autos</h1>
-            <p class="subtitulo">Filtra los vehículos por modelo o gestiona los registros existentes.</p>
+            <p class="subtitulo">Consulta los vehículos por modelo, por placa o muestra todo el catálogo.</p>
         </div>
         <a href="index.php?accion=agregar" class="btn btn-primario">+ Agregar auto</a>
     </div>
 
-    <!-- Filtro por modelo -->
+    <!-- Formulario de consulta por modelo o placa -->
     <form method="get" action="index.php" class="barra-filtro">
         <input type="hidden" name="accion" value="listar">
         <div class="campo-filtro">
-            <label for="modelo">Filtrar por modelo:</label>
+            <label for="modelo">Modelo:</label>
             <select name="modelo" id="modelo">
                 <option value=""<?php if ($modeloSeleccionado === '' || $modeloSeleccionado === 'Todos') { echo ' selected'; } ?>>Todos</option>
                 <?php foreach ($modelosDisponibles as $modeloOpt): ?>
@@ -35,21 +43,34 @@ include __DIR__ . '/layouts/header.php';
                 <?php endforeach; ?>
             </select>
         </div>
+        <div class="campo-filtro">
+            <label for="placa">Placa (opcional):</label>
+            <input type="text" name="placa" id="placa" value="<?= $placaBuscada ?>" placeholder="Ej. AB-1234">
+        </div>
         <div class="acciones-filtro">
-            <button type="submit" class="btn btn-primario">Filtrar</button>
-            <?php if ($modeloSeleccionado !== '' && $modeloSeleccionado !== 'Todos'): ?>
+            <button type="submit" class="btn btn-primario">Buscar</button>
+            <a href="index.php?accion=listar&amp;modelo=Todos" class="btn btn-borde">Mostrar todos</a>
+            <?php if ($seBusco): ?>
                 <a href="index.php?accion=listar" class="btn btn-borde">Limpiar</a>
             <?php endif; ?>
         </div>
     </form>
 
-    <!-- Tabla de resultados o estado vacío -->
-    <?php if (empty($autos)): ?>
+    <!-- Estado inicial, sin coincidencias o tabla de resultados -->
+    <?php if (!$seBusco): ?>
+        <div class="estado-vacio">
+            <h2>Consulta el catálogo de autos</h2>
+            <p>Selecciona un modelo, escribe una placa o pulsa "Mostrar todos" para listar los vehículos.</p>
+            <div class="acciones-inline">
+                <a href="index.php?accion=listar&amp;modelo=Todos" class="btn btn-primario">Mostrar todos</a>
+            </div>
+        </div>
+    <?php elseif (empty($autos)): ?>
         <div class="estado-vacio">
             <h2>No hay autos registrados</h2>
-            <p>No se encontraron vehículos que coincidan con el filtro seleccionado.</p>
+            <p>No se encontraron vehículos que coincidan con la búsqueda realizada.</p>
             <div class="acciones-inline">
-                <a href="index.php?accion=listar" class="btn btn-borde">Ver todos</a>
+                <a href="index.php?accion=listar&amp;modelo=Todos" class="btn btn-borde">Ver todos</a>
                 <a href="index.php?accion=agregar" class="btn btn-primario">Registrar nuevo auto</a>
             </div>
         </div>

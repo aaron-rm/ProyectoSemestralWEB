@@ -266,7 +266,7 @@ a { color: inherit; text-decoration: none; }
 .campo { display: flex; flex-direction: column; gap: 6px; }
 .campo-completo, .acciones-formulario { grid-column: 1 / -1; }
 .campo label, .campo-filtro label { font-weight: 600; font-size: 0.92rem; color: var(--primario); }
-.campo input, .campo select, .campo-filtro select {
+.campo input, .campo select, .campo-filtro input, .campo-filtro select {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid var(--borde);
@@ -277,7 +277,7 @@ a { color: inherit; text-decoration: none; }
     background: var(--superficie);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.campo input:focus, .campo select:focus, .campo-filtro select:focus { outline: none; border-color: var(--acento); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18); }
+.campo input:focus, .campo select:focus, .campo-filtro input:focus, .campo-filtro select:focus { outline: none; border-color: var(--acento); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18); }
 .campo input[readonly] { background: #e9eef4; color: var(--texto-suave); cursor: not-allowed; }
 .ayuda-campo { font-size: 0.8rem; color: var(--texto-suave); }
 .acciones-formulario { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 6px; }

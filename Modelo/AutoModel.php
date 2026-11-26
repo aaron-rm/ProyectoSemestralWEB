@@ -1,13 +1,18 @@
 <?php
-// Obtiene todos los autos o los filtra por modelo, junto con el nombre del cliente
-function listarAutos($conexion, $modelo = '')
+// Obtiene todos los autos o los filtra por modelo y/o placa, junto con el nombre del cliente
+function listarAutos($conexion, $modelo = '', $placa = '')
 {
     $sql = "SELECT a.*, c.nombre_cliente
             FROM autos a
-            INNER JOIN clientes c ON a.id_cliente = c.id_cliente";
+            INNER JOIN clientes c ON a.id_cliente = c.id_cliente
+            WHERE 1=1";
 
     if ($modelo !== '' && $modelo !== 'Todos') {
-        $sql .= " WHERE a.modelo = '$modelo'";
+        $sql .= " AND a.modelo = '$modelo'";
+    }
+
+    if ($placa !== '') {
+        $sql .= " AND a.placa LIKE '%$placa%'";
     }
 
     $resultado = mysqli_query($conexion, $sql);

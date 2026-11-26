@@ -5,13 +5,25 @@ require_once __DIR__ . '/../Modelo/AutoModel.php';
 
 if ($accion === 'listar') {
     $modelo = '';
-    if (isset($_GET['modelo'])) {
-        $modelo = $_GET['modelo'];
-    } elseif (isset($_POST['modelo'])) {
-        $modelo = $_POST['modelo'];
+    $placa = '';
+    $seBusco = false;
+
+    // Solo consulta la BD cuando el usuario selecciona un filtro, busca una placa o pulsa "Mostrar todos"
+    if (isset($_GET['modelo']) || isset($_GET['placa'])) {
+        $seBusco = true;
+        if (isset($_GET['modelo'])) {
+            $modelo = trim($_GET['modelo']);
+        }
+        if (isset($_GET['placa'])) {
+            $placa = trim($_GET['placa']);
+        }
     }
 
-    $autos = listarAutos($conexion, $modelo);
+    $autos = [];
+    if ($seBusco) {
+        $autos = listarAutos($conexion, $modelo, $placa);
+    }
+
     include __DIR__ . '/../Vista/mostrar_autos.php';
 
 } elseif ($accion === 'agregar') {
@@ -30,7 +42,7 @@ if ($accion === 'listar') {
     guardarCliente($conexion, $id_cliente, $nombre_cliente);
     guardarAuto($conexion, $placa, $marca, $modelo, $kilometraje, $id_cliente);
 
-    header('Location: index.php?accion=listar');
+    header('Location: index.php?accion=listar&modelo=Todos');
     exit;
 
 } elseif ($accion === 'editar' && isset($_GET['placa'])) {
@@ -38,7 +50,7 @@ if ($accion === 'listar') {
     $auto = buscarAutoPorPlaca($conexion, $placa);
 
     if (!$auto) {
-        header('Location: index.php?accion=listar');
+        header('Location: index.php?accion=listar&modelo=Todos');
         exit;
     }
 
@@ -53,14 +65,14 @@ if ($accion === 'listar') {
 
     actualizarAuto($conexion, $placa, $marca, $modelo, $kilometraje, $id_cliente);
 
-    header('Location: index.php?accion=listar');
+    header('Location: index.php?accion=listar&modelo=Todos');
     exit;
 
 } elseif ($accion === 'eliminar' && isset($_GET['placa'])) {
     $placa = $_GET['placa'];
     eliminarAuto($conexion, $placa);
 
-    header('Location: index.php?accion=listar');
+    header('Location: index.php?accion=listar&modelo=Todos');
     exit;
 
 } else {
