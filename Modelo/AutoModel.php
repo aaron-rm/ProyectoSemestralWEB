@@ -30,6 +30,13 @@ function listarAutos($conexion, $modelo = '', $placa = '', $id_cliente = '')
     return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 }
 
+// Verifica si ya existe un auto con esa placa (retorna true si existe)
+function placaExiste($conexion, $placa)
+{
+    $resultado = mysqli_query($conexion, "SELECT placa FROM autos WHERE placa = '$placa'");
+    return mysqli_num_rows($resultado) > 0;
+}
+
 // Busca un auto por su placa para cargarlo en el formulario de edición
 function buscarAutoPorPlaca($conexion, $placa)
 {

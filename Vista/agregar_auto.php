@@ -16,6 +16,9 @@ include __DIR__ . '/layouts/header.php';
     </div>
 
     <form method="post" action="index.php?accion=guardar" class="formulario-compuesto">
+        <?php if (isset($errorGuardar)): ?>
+            <p class="mensaje-error"><?= $errorGuardar ?></p>
+        <?php endif; ?>
         <fieldset class="grupo-campos">
             <legend>Datos del Cliente</legend>
             <div class="formulario-grid">

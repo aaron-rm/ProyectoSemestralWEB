@@ -46,6 +46,13 @@ if ($accion === 'listar') {
     $modelo         = $_POST['modelo'];
     $kilometraje    = $_POST['kilometraje'];
 
+    // Si la placa ya existe, volvemos al formulario con un mensaje de error
+    if (placaExiste($conexion, $placa)) {
+        $errorGuardar = "La placa \"$placa\" ya está registrada. Usa una placa diferente.";
+        include __DIR__ . '/../Vista/agregar_auto.php';
+        exit;
+    }
+
     // Insertar primero en clientes y luego en autos (por la llave foránea)
     guardarCliente($conexion, $id_cliente, $nombre_cliente);
     guardarAuto($conexion, $placa, $marca, $modelo, $kilometraje, $id_cliente);
