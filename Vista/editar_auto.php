@@ -30,7 +30,7 @@ include __DIR__ . '/layouts/header.php';
 
         <div class="campo">
             <label for="marca">Marca</label>
-            <input type="text" id="marca" name="marca" value="<?= $auto['marca'] ?>" maxlength="50" required>
+            <input type="text" id="marca" name="marca" value="<?= $auto['marca'] ?>" minlength="2" maxlength="50" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ0-9]+( [A-Za-zÁÉÍÓÚáéíóúÑñ0-9]+)*" title="Solo se permiten letras, números y espacios." required>
         </div>
 
         <div class="campo">
@@ -44,12 +44,12 @@ include __DIR__ . '/layouts/header.php';
 
         <div class="campo">
             <label for="kilometraje">Kilometraje (km)</label>
-            <input type="number" id="kilometraje" name="kilometraje" value="<?= $auto['kilometraje'] ?>" min="0" step="1" required>
+            <input type="number" id="kilometraje" name="kilometraje" value="<?= $auto['kilometraje'] ?>" min="0" max="9999999" step="1" required>
         </div>
 
         <div class="campo campo-completo">
             <label for="id_cliente">ID del Cliente</label>
-            <input type="number" id="id_cliente" name="id_cliente" value="<?= $auto['id_cliente'] ?>" min="1" step="1" required>
+            <input type="number" id="id_cliente" name="id_cliente" value="<?= $auto['id_cliente'] ?>" min="1" max="999999999" step="1" required>
         </div>
 
         <div class="acciones-formulario">

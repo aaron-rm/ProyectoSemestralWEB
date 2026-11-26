@@ -21,11 +21,11 @@ include __DIR__ . '/layouts/header.php';
             <div class="formulario-grid">
                 <div class="campo">
                     <label for="id_cliente">ID del Cliente</label>
-                    <input type="number" id="id_cliente" name="id_cliente" min="1" step="1" placeholder="Ej. 1" required>
+                    <input type="number" id="id_cliente" name="id_cliente" min="1" max="999999999" step="1" placeholder="Ej. 1" required>
                 </div>
                 <div class="campo">
                     <label for="nombre_cliente">Nombre del Cliente</label>
-                    <input type="text" id="nombre_cliente" name="nombre_cliente" maxlength="100" placeholder="Ej. Ana Pérez" required>
+                    <input type="text" id="nombre_cliente" name="nombre_cliente" minlength="2" maxlength="100" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+( [A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)*" title="Solo se permiten letras y espacios." placeholder="Ej. Ana Pérez" required>
                 </div>
             </div>
         </fieldset>
@@ -35,11 +35,11 @@ include __DIR__ . '/layouts/header.php';
             <div class="formulario-grid">
                 <div class="campo">
                     <label for="placa">Placa</label>
-                    <input type="text" id="placa" name="placa" maxlength="20" placeholder="Ej. AB-1234" required>
+                    <input type="text" id="placa" name="placa" minlength="4" maxlength="10" pattern="[A-Za-z0-9]+(-[A-Za-z0-9]+)*" title="Solo letras, números y guiones (ej. AB1234 o AB-1234)." placeholder="Ej. AB-1234" required>
                 </div>
                 <div class="campo">
                     <label for="marca">Marca</label>
-                    <input type="text" id="marca" name="marca" maxlength="50" placeholder="Ej. Toyota" required>
+                    <input type="text" id="marca" name="marca" minlength="2" maxlength="50" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ0-9]+( [A-Za-zÁÉÍÓÚáéíóúÑñ0-9]+)*" title="Solo se permiten letras, números y espacios." placeholder="Ej. Toyota" required>
                 </div>
                 <div class="campo">
                     <label for="modelo">Modelo</label>
@@ -52,7 +52,7 @@ include __DIR__ . '/layouts/header.php';
                 </div>
                 <div class="campo">
                     <label for="kilometraje">Kilometraje (km)</label>
-                    <input type="number" id="kilometraje" name="kilometraje" min="0" step="1" placeholder="Ej. 45000" required>
+                    <input type="number" id="kilometraje" name="kilometraje" min="0" max="9999999" step="1" placeholder="Ej. 45000" required>
                 </div>
             </div>
         </fieldset>
