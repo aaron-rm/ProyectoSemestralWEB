@@ -46,7 +46,7 @@ include __DIR__ . '/layouts/header.php';
                     <select id="modelo" name="modelo" required>
                         <option value="" disabled selected>Seleccione un modelo...</option>
                         <?php foreach ($modelosDisponibles as $modeloOpt): ?>
-                            <option value="<?= e($modeloOpt) ?>"><?= e($modeloOpt) ?></option>
+                            <option value="<?= $modeloOpt ?>"><?= $modeloOpt ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

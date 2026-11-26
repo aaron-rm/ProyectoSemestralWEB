@@ -1,46 +1,68 @@
 <?php
-// Ruta base (respaldo si no vino de header.php)
-$rutaVista = $rutaVista ?? (basename(dirname($_SERVER['SCRIPT_NAME'] ?? '')) === 'Vista' ? '' : 'Vista/');
+// Ruta base para CSS/imágenes: vacía si se carga desde index.php (raíz), 'Vista/' si no
+if (isset($rutaVista)) {
+    // Si $rutaVista ya existe, no hacemos nada.
+} else {
+    if (isset($_SERVER['SCRIPT_NAME'])) {
+        // Obtiene la ruta del directorio donde se ejecuta el archivo.
+        $directorio = dirname($_SERVER['SCRIPT_NAME']);
+    } else {
+        // Si no está disponible la ruta, utiliza el directorio actual.
+        $directorio = dirname('');
+    }
+
+    // Obtiene solamente el nombre del directorio padre.
+    $nombreDirectorio = basename($directorio);
+
+    if ($nombreDirectorio === 'Vista') {
+        $rutaVista = '';
+    } else {
+        $rutaVista = 'Vista/';
+    }
+}
 
 $redes = [
-    ['Facebook',  'https://www.facebook.com/',  'facebook'],
+    ['Facebook', 'https://www.facebook.com/', 'facebook'],
     ['Instagram', 'https://www.instagram.com/', 'instagram'],
-    ['X',         'https://x.com/',             'x'],
-    ['YouTube',   'https://www.youtube.com/',   'youtube'],
-    ['TikTok',    'https://www.tiktok.com/',    'tiktok'],
+    ['X', 'https://x.com/', 'x'],
+    ['YouTube', 'https://www.youtube.com/', 'youtube'],
+    ['TikTok', 'https://www.tiktok.com/', 'tiktok'],
 ];
 ?>
-    </main>
+</main>
 
-    <footer class="site-footer">
-        <div class="contenedor footer-contenido">
-            <p class="footer-marca">
-                <a href="index.php"><img src="<?= $rutaVista ?>img/logo-blanco.png" alt="Machine Line - Inicio" height="26"></a><br>
-                Arrendadora de Autos
-            </p>
-            <nav class="footer-redes" aria-label="Páginas del sitio">
-                <strong>Páginas</strong>
-                <ul>
-                    <li><a href="index.php?accion=acerca">Acerca de</a></li>
-                    <li><a href="index.php?accion=listar">Mostrar autos</a></li>
-                    <li><a href="index.php?accion=agregar">Agregar autos</a></li>
-                </ul>
-            </nav>
-            <nav class="footer-redes" aria-label="Redes sociales">
-                <strong>Síguenos</strong>
-                <ul>
-                    <?php foreach ($redes as [$red, $url, $icono]): ?>
-                        <li>
-                            <a href="<?= $url ?>" target="_blank" rel="noopener noreferrer">
-                                <img src="<?= $rutaVista ?>img/redes/<?= $icono ?>.svg" alt="" width="20" height="20">
-                                <?= $red ?>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </nav>
-            <p class="footer-copy">&copy; <?= function_exists('e') ? e(date('Y')) : date('Y') ?> Machine Line. Movilidad confiable para cada camino.</p>
-        </div>
-    </footer>
+<footer class="site-footer">
+    <div class="contenedor footer-contenido">
+        <p class="footer-marca">
+            <a href="index.php"><img src="<?= $rutaVista ?>img/logo-blanco.png" alt="Machine Line - Inicio"
+                    height="26"></a><br>
+            Arrendadora de Autos
+        </p>
+        <nav class="footer-redes" aria-label="Páginas del sitio">
+            <strong>Páginas</strong>
+            <ul>
+                <li><a href="index.php?accion=acerca">Acerca de</a></li>
+                <li><a href="index.php?accion=listar">Mostrar autos</a></li>
+                <li><a href="index.php?accion=agregar">Agregar autos</a></li>
+            </ul>
+        </nav>
+        <nav class="footer-redes" aria-label="Redes sociales">
+            <strong>Síguenos</strong>
+            <ul>
+                <?php foreach ($redes as [$red, $url, $icono]): ?>
+                    <li>
+                        <a href="<?= $url ?>" target="_blank" rel="noopener noreferrer">
+                            <img src="<?= $rutaVista ?>img/redes/<?= $icono ?>.svg" alt="" width="20" height="20">
+                            <?= $red ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </nav>
+        <p class="footer-copy">&copy; <?= date('Y') ?> Machine Line. Movilidad confiable para cada camino.
+        </p>
+    </div>
+</footer>
 </body>
+
 </html>

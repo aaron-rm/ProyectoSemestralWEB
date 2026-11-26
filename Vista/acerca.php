@@ -25,7 +25,7 @@ $categorias = [
     <div class="carrusel-pista">
         <?php foreach ($slidesHero as $indice => $slide): ?>
             <div class="carrusel-slide carrusel-slide-<?= $indice ?>">
-                <img src="<?= e($rutaVista . $slide['imagen']) ?>" alt="<?= e($slide['alt']) ?>" <?= $indice > 0 ? 'loading="lazy" ' : '' ?>decoding="async">
+                <img src="<?= $rutaVista . $slide['imagen'] ?>" alt="<?= $slide['alt'] ?>" <?php if ($indice > 0) { echo 'loading="lazy" '; } ?>decoding="async">
             </div>
         <?php endforeach; ?>
     </div>
@@ -90,10 +90,10 @@ $categorias = [
 
     <div class="grid-tarjetas grid-4">
         <?php foreach ($categorias as [$modelo, $subtitulo, $detalle]): ?>
-            <a href="index.php?accion=listar&amp;modelo=<?= e(urlencode($modelo)) ?>" class="tarjeta tarjeta-enlace">
-                <span class="badge badge-modelo"><?= e($modelo) ?></span>
-                <h3><?= e($subtitulo) ?></h3>
-                <p><?= e($detalle) ?></p>
+            <a href="index.php?accion=listar&amp;modelo=<?= urlencode($modelo) ?>" class="tarjeta tarjeta-enlace">
+                <span class="badge badge-modelo"><?= $modelo ?></span>
+                <h3><?= $subtitulo ?></h3>
+                <p><?= $detalle ?></p>
             </a>
         <?php endforeach; ?>
     </div>

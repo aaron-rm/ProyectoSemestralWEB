@@ -6,7 +6,14 @@ if (!isset($autos)) {
     ];
 }
 
-$modeloSeleccionado = $_GET['modelo'] ?? ($_POST['modelo'] ?? '');
+if (isset($_GET['modelo'])) {
+    $modeloSeleccionado = $_GET['modelo'];
+} elseif (isset($_POST['modelo'])) {
+    $modeloSeleccionado = $_POST['modelo'];
+} else {
+    $modeloSeleccionado = '';
+}
+
 $modelosDisponibles = ['SEDAN', 'PICK-UP', 'SUB', 'BUSITO'];
 
 $tituloPagina = 'Mostrar Autos | Machine Line';
@@ -29,9 +36,9 @@ include __DIR__ . '/layouts/header.php';
         <div class="campo-filtro">
             <label for="modelo">Filtrar por modelo:</label>
             <select name="modelo" id="modelo">
-                <option value=""<?= ($modeloSeleccionado === '' || $modeloSeleccionado === 'Todos') ? ' selected' : '' ?>>Todos</option>
+                <option value=""<?php if ($modeloSeleccionado === '' || $modeloSeleccionado === 'Todos') { echo ' selected'; } ?>>Todos</option>
                 <?php foreach ($modelosDisponibles as $modeloOpt): ?>
-                    <option value="<?= e($modeloOpt) ?>"<?= $modeloSeleccionado === $modeloOpt ? ' selected' : '' ?>><?= e($modeloOpt) ?></option>
+                    <option value="<?= $modeloOpt ?>"<?php if ($modeloSeleccionado === $modeloOpt) { echo ' selected'; } ?>><?= $modeloOpt ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -69,19 +76,19 @@ include __DIR__ . '/layouts/header.php';
                 </thead>
                 <tbody>
                     <?php foreach ($autos as $auto): ?>
-                        <?php $placa = (string)($auto['placa'] ?? ''); ?>
+                        <?php $placa = (string)$auto['placa']; ?>
                         <tr>
-                            <td class="celda-placa"><?= e($placa) ?></td>
-                            <td><?= e($auto['marca'] ?? '') ?></td>
-                            <td><span class="badge badge-modelo"><?= e($auto['modelo'] ?? '') ?></span></td>
-                            <td><?= e(number_format((int)($auto['kilometraje'] ?? 0), 0, '.', ',') . ' km') ?></td>
-                            <td><?= e($auto['id_cliente'] ?? '') ?></td>
-                            <td><?= e($auto['nombre_cliente'] ?? '') ?></td>
+                            <td class="celda-placa"><?= $placa ?></td>
+                            <td><?= $auto['marca'] ?></td>
+                            <td><span class="badge badge-modelo"><?= $auto['modelo'] ?></span></td>
+                            <td><?= number_format((int)$auto['kilometraje'], 0, '.', ',') ?> km</td>
+                            <td><?= $auto['id_cliente'] ?></td>
+                            <td><?= $auto['nombre_cliente'] ?></td>
                             <td class="celda-acciones">
-                                <a href="index.php?accion=editar&amp;placa=<?= e(urlencode($placa)) ?>" class="btn btn-sm btn-editar">Editar</a>
-                                <a href="index.php?accion=eliminar&amp;placa=<?= e(urlencode($placa)) ?>"
+                                <a href="index.php?accion=editar&amp;placa=<?= urlencode($placa) ?>" class="btn btn-sm btn-editar">Editar</a>
+                                <a href="index.php?accion=eliminar&amp;placa=<?= urlencode($placa) ?>"
                                    class="btn btn-sm btn-eliminar"
-                                   onclick="return confirm('¿Está seguro de eliminar el vehículo con placa <?= e($placa) ?>?');">Eliminar</a>
+                                   onclick="return confirm('¿Está seguro de eliminar el vehículo con placa <?= $placa ?>?');">Eliminar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
