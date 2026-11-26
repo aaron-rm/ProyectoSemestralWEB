@@ -1,6 +1,13 @@
 <?php
-// Obtiene todos los autos o los filtra por modelo y/o placa, junto con el nombre del cliente
-function listarAutos($conexion, $modelo = '', $placa = '')
+// Obtiene las placas registradas para llenar el selector de búsqueda
+function listarPlacas($conexion)
+{
+    $resultado = mysqli_query($conexion, "SELECT placa, marca FROM autos ORDER BY placa");
+    return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+}
+
+// Obtiene todos los autos o los filtra por modelo, placa y/o cliente
+function listarAutos($conexion, $modelo = '', $placa = '', $id_cliente = '')
 {
     $sql = "SELECT a.*, c.nombre_cliente
             FROM autos a
@@ -12,7 +19,11 @@ function listarAutos($conexion, $modelo = '', $placa = '')
     }
 
     if ($placa !== '') {
-        $sql .= " AND a.placa LIKE '%$placa%'";
+        $sql .= " AND a.placa = '$placa'";
+    }
+
+    if ($id_cliente !== '') {
+        $sql .= " AND a.id_cliente = '$id_cliente'";
     }
 
     $resultado = mysqli_query($conexion, $sql);
