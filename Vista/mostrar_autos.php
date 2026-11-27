@@ -25,19 +25,18 @@ include __DIR__ . '/layouts/header.php';
         <input type="hidden" name="accion" value="listar">
         <div class="campo-filtro">
             <label for="modelo">Modelo:</label>
-            <select name="modelo" id="modelo">
+            <select name="modelo" id="modelo" onchange="this.form.submit()">
                 <option value="Todos"<?php if ($modeloSeleccionado === '' || $modeloSeleccionado === 'Todos') { echo ' selected'; } ?>>Todos</option>
                 <?php foreach ($modelosDisponibles as $modeloOpt): ?>
                     <option value="<?= $modeloOpt ?>"<?php if ($modeloSeleccionado === $modeloOpt) { echo ' selected'; } ?>><?= $modeloOpt ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
-        <div class="acciones-filtro">
-            <button type="submit" class="btn btn-primario">Buscar</button>
-            <?php if ($modeloSeleccionado !== '' && $modeloSeleccionado !== 'Todos'): ?>
+        <?php if ($modeloSeleccionado !== '' && $modeloSeleccionado !== 'Todos'): ?>
+            <div class="acciones-filtro">
                 <a href="index.php?accion=listar" class="btn btn-borde">Mostrar todos</a>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
     </form>
 
     <?php if (empty($autos)): ?>
